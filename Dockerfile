@@ -16,8 +16,8 @@ COPY . .
 # Train model (creates iris_model.pkl)
 RUN python model.py
 
-# Expose Streamlit port
+# Expose port
 EXPOSE 8501
 
-# Run Streamlit app
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Correct CMD with runtime variable expansion
+CMD streamlit run app.py --server.port=${PORT:-8501} --server.address=0.0.0.0
