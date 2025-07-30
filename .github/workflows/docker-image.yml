@@ -37,6 +37,11 @@ jobs:
     - name: Install Railway CLI
       run: curl -fsSL https://railway.app/install.sh | sh
 
+    - name: Debug Railway Token
+      run: echo "Token is set"
+      env:
+         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
     - name: Deploy to Railway
       run: railway up --service=iris-classifier --ci
       env:
