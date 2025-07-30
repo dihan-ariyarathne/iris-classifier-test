@@ -1,4 +1,4 @@
-name: Build and Push Docker image
+name: Build, Push, and Deploy
 
 on:
   push:
@@ -25,3 +25,19 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/iris-classifier:latest
+
+  deploy-railway:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Railway CLI
+      run: curl -fsSL https://railway.app/install.sh | sh
+
+    - name: Deploy to Railway
+      run: railway up --service=iris-classifier --ci
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
