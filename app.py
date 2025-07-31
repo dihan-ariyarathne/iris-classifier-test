@@ -9,7 +9,7 @@ iris = load_iris()
 
 # Streamlit App
 st.title("🌸 Iris Flower Classifier")
-st.write("Predict the type of Iris flower from its features.")
+st.write("Predict the type of Iris flower from its features showed below.")
 
 # Input sliders
 sepal_length = st.slider("Sepal length (cm)", float(iris.data[:,0].min()), float(iris.data[:,0].max()))
